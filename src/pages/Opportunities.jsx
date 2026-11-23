@@ -15,6 +15,11 @@ fetchOpportunities();
     <h1>Explore Opportunities</h1>
     {opportunities.map((job) => (
   <OpportunityCard opportunity={job} />
-))}</div>)
+))}<p>
+  Powered by{" "}
+  <a href="https://devglobaljobs.com" target="_blank" rel="noreferrer">
+    Dev Global Jobs
+  </a>
+</p></div>)
 }
 export default Opportunities
