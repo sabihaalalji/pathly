@@ -2,7 +2,8 @@ import heroImg from "../assets/herobg.jpg";
 
 export default function Home() {
   return (
-    // hero section 
+    <> 
+    
     <section className="bg-[#042F2E] px-5 py-8 text-white ">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="max-w-md">
@@ -36,9 +37,51 @@ export default function Home() {
    
     </section>
 
-// how it works step 
 
+<section>
+  <p>BROWSE</p>
+  <h2>Find what fits you</h2>
+  <p>Pick a type to see what is open right now.</p>
 
+  <div>
+    <div>
+      <h3>Jobs</h3>
+      <p>Full-time, part-time and remote roles</p>
+      <span>→</span>
+    </div>
 
+    <div>
+      <h3>Internships</h3>
+      <p>Get your first experience</p>
+      <span>→</span>
+    </div>
+
+    <div>
+      <h3>Scholarships</h3>
+      <p>Bursaries and funding</p>
+      <span>→</span>
+    </div>
+
+    <div>
+      <h3>Training</h3>
+      <p>Courses and skills</p>
+      <span>→</span>
+    </div>
+
+    <div>
+      <h3>Volunteering</h3>
+      <p>Give back and grow</p>
+      <span>→</span>
+    </div>
+
+    <div>
+      <h3>Freelance gigs</h3>
+      <p>Short jobs to earn from your skills</p>
+      <span>→</span>
+    </div>
+  </div>
+</section>
+
+</>
   );
 }
