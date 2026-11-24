@@ -152,21 +152,30 @@ export default function Home() {
     </div>
   </div>
 </section>
+<section className="bg-[#F0FDFA] px-5 md:px-16 py-8">
+  <div className="relative overflow-hidden rounded-3xl bg-[#042F2E] px-6 py-10 text-center text-[#F0FDFA]">
 
-<section>
-  <div>
-    <div></div>
-    <div></div>
+    <div className="absolute -top-16 -left-12 w-44 h-44 rounded-full bg-[#0F766E] opacity-40"></div>
+    <div className="absolute -bottom-16 -right-12 w-44 h-44 rounded-full bg-[#FB7185] opacity-20"></div>
 
-    <div>
-      <h2>Ready to take your <span>first step?</span></h2>
-      <p>Create a free account in under a minute.</p>
+    <div className="relative">
+      <h2 className="text-2xl md:text-4xl font-medium leading-tight">
+        Ready to take your <span className="text-[#FB7185]">first step?</span>
+      </h2>
+      <p className="mt-3 text-sm md:text-base text-[#CCFBF1]">
+        Create a free account in under a minute.
+      </p>
 
-      <div>
-        <button>Create free account</button>
-        <button>Log in</button>
+      <div className="mt-6 mx-auto flex flex-col gap-3 max-w-xs">
+        <button className="bg-[#FB7185] text-[#042F2E] py-3 rounded-lg text-base font-medium">
+          Create free account
+        </button>
+        <button className="border border-[#5EEAD4] text-[#F0FDFA] py-3 rounded-lg text-base font-medium">
+          Log in
+        </button>
       </div>
     </div>
+
   </div>
 </section>
 
