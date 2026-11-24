@@ -153,6 +153,23 @@ export default function Home() {
   </div>
 </section>
 
+<section>
+  <div>
+    <div></div>
+    <div></div>
+
+    <div>
+      <h2>Ready to take your <span>first step?</span></h2>
+      <p>Create a free account in under a minute.</p>
+
+      <div>
+        <button>Create free account</button>
+        <button>Log in</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 </>
   );
