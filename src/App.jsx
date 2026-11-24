@@ -1,14 +1,11 @@
 import Opportunities from "./pages/Opportunities";
 
-
-
 function App() {
-  
-
   return (
     <>
-      <Opportunities/></>
-  )
+      <Opportunities />
+    </>
+  );
 }
 
-export default App
+export default App;
