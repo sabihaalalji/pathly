@@ -7,17 +7,51 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const[submittedAnswer,setSubmittedAnswer]=useState('')
+  const[submissionMessage,setSubmissionMessage]=useState('')
+  function handleApply(answer){
+    const seekerId='sample-seeker'
+    const opportunityId='sample-internship'
+    const storageKey='pathly.applications'
+
+    try{
+      const savedData=localStorage.getItem(storageKey)
+      const applications=savedData ? JSON.parse(savedData):[]
+      const alreadyApplied=applications.some(
+        (application)=>
+          application.seekerId === seekerId &&
+        application.opportunityId === opportunityId
+      )
+      if(alreadyApplied){
+        setSubmissionMessage('You have already applied for this opportunity.')
+        return
+      }
+      const newApplication={
+        id:crypto.randomUUID(),
+        seekerId,
+        opportunityId,
+        statement:answer,
+        status:'Submitted',
+        submittedAt:new Date().toISOString(),
+      }
+      localStorage.setItem(
+        storageKey,JSON.stringify([...applications,newApplication])
+      )
+      setSubmissionMessage('Application submitted')
+    } 
+    catch{
+      setSubmissionMessage('Could not save your application.Please try again.')
+    }
+  }
 
   return (
     <>
     <section>
       <h1>Apply for an opportunity</h1>
-      <ApplicationForm onApply={setSubmittedAnswer}/>
-      {submittedAnswer && <p>Answer received: {submittedAnswer}</p>}
+      <ApplicationForm onApply={handleApply}/>
+      {submissionMessage && <p>{submissionMessage}</p>}
     </section>
 
-    
+
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
