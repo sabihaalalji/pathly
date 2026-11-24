@@ -1,6 +1,11 @@
+import heroImg from "../assets/herobg.jpg";
+
 export default function Home() {
   return (
-    <section className="bg-[#042F2E] px-5 py-10 text-white text-4xl md:text-2xl size-36px  ">
+    <section className="bg-[#042F2E] px-5 py-8 text-white ">
+        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+        <div className="max-w-md">
+         
       <h1 className="text-4xl font-medium leading-tight text-[#F0FDFA]">
         FIND YOUR FIRST STEP <span className="text-[#FB7185]">  BUILD YOUR FUTURE</span>
       </h1>
@@ -23,6 +28,12 @@ export default function Home() {
             <p className="mt-1 text-xs text-[#CCFBF1]">Nairobi| Closes 30 Dec</p>
         </div>
       </div>
+      </div>
+         <img src={heroImg}
+          alt="Young person using a laptop" className="w-full h-72 rounded-2xl object-cover md:w-1/2 md:h-96"/>
+   </div>
+   
     </section>
+
   );
 }
