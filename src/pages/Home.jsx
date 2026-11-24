@@ -117,6 +117,45 @@ export default function Home() {
   </div>
 </section>
 
+<section>
+  <p>WHO IS IT FOR</p>
+  <h2>Two ways to join</h2>
+  <p>Choose your role when you sign up.</p>
+
+  <div>
+    <div>
+      <span>FOR SEEKERS</span>
+      <h3>Opportunity seekers</h3>
+      <p>For students, graduates and anyone starting out.</p>
+
+      <div><span>✓</span> Discover jobs, internships and training</div>
+      <div><span>✓</span> Apply in a few clicks</div>
+      <div><span>✓</span> Build a profile and portfolio</div>
+
+      <button>
+        <span>Join as a seeker</span>
+        <span>→</span>
+      </button>
+    </div>
+
+    <div>
+      <span>FOR PROVIDERS</span>
+      <h3>Opportunity providers</h3>
+      <p>For employers, schools, NGOs and businesses.</p>
+
+      <div><span>✓</span> Post and manage your listings</div>
+      <div><span>✓</span> Review applicants and their profiles</div>
+      <div><span>✓</span> Shortlist, accept or reject</div>
+
+      <button>
+        <span>Join as a provider</span>
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
 </>
   );
 }
