@@ -1,41 +1,49 @@
-
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Opportunities from "./pages/Opportunities";
-import ApplicationForm from "./components/ApplicationForm.jsx";
-
-export default function App() {
-  const [submittedAnswer, setSubmittedAnswer] = useState("");
-
-  return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/opportunities" element={<Opportunities />} />
-        <Route
-          path="/apply"
-          element={
-            <section>
-              <h2>Apply for an opportunity</h2>
-              <ApplicationForm onApply={setSubmittedAnswer} />
-              {submittedAnswer && <p>Answer received: {submittedAnswer}</p>}
-            </section>
-          }
-        />
-      </Routes>
-    </div>
-  );
-}
-
 import { useState } from 'react'
 import ApplicationForm from './components/ApplicationForm.jsx'
 import Opportunities from './pages/Opportunities'
 
 function App() {
-  const [submittedAnswer, setSubmittedAnswer] = useState('')
+  const [submissionMessage, setSubmissionMessage] = useState('')
+
+  function handleApply(answer) {
+    const seekerId = 'sample-seeker'
+    const opportunityId = 'sample-internship'
+    const storageKey = 'pathly.applications'
+
+    try {
+      const savedData = localStorage.getItem(storageKey)
+      const applications = savedData ? JSON.parse(savedData) : []
+
+      const alreadyApplied = applications.some(
+        (application) =>
+          application.seekerId === seekerId &&
+          application.opportunityId === opportunityId
+      )
+
+      if (alreadyApplied) {
+        setSubmissionMessage('You have already applied for this opportunity.')
+        return
+      }
+
+      const newApplication = {
+        id: crypto.randomUUID(),
+        seekerId,
+        opportunityId,
+        statement: answer,
+        status: 'Submitted',
+        submittedAt: new Date().toISOString(),
+      }
+
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify([...applications, newApplication])
+      )
+
+      setSubmissionMessage('Application submitted.')
+    } catch {
+      setSubmissionMessage('Could not save your application. Please try again.')
+    }
+  }
 
   return (
     <>
@@ -43,12 +51,11 @@ function App() {
 
       <section>
         <h2>Apply for an opportunity</h2>
-        <ApplicationForm onApply={setSubmittedAnswer} />
-        {submittedAnswer && <p>Answer received: {submittedAnswer}</p>}
+        <ApplicationForm onApply={handleApply} />
+        {submissionMessage && <p>{submissionMessage}</p>}
       </section>
     </>
   )
 }
 
 export default App
-
