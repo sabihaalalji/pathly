@@ -2,6 +2,7 @@ import heroImg from "../assets/herobg.jpg";
 
 export default function Home() {
   return (
+    // hero section 
     <section className="bg-[#042F2E] px-5 py-8 text-white ">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="max-w-md">
@@ -34,6 +35,10 @@ export default function Home() {
    </div>
    
     </section>
+
+// how it works step 
+
+
 
   );
 }
