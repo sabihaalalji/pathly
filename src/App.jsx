@@ -2,13 +2,22 @@ import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import ApplicationForm from './components/ApplicationForm.jsx'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const[submittedAnswer,setSubmittedAnswer]=useState('')
 
   return (
     <>
+    <section>
+      <h1>Apply for an opportunity</h1>
+      <ApplicationForm onApply={setSubmittedAnswer}/>
+      {submittedAnswer && <p>Answer received: {submittedAnswer}</p>}
+    </section>
+
+    
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
