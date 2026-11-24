@@ -84,36 +84,34 @@ export default function Home() {
 </section>
 
 
+<section className="relative overflow-hidden bg-[#042F2E] px-5 md:px-16 py-8">
+  <p className="text-xs font-medium tracking-wider text-[#FB7185]">HOW IT WORKS</p>
+  <h2 className="mt-1 text-2xl font-medium text-[#F0FDFA]">Three simple steps</h2>
+  <p className="mt-1 text-sm text-[#CCFBF1]">From sign up to your first opportunity.</p>
 
-<section>
-  <p>HOW IT WORKS</p>
-  <h2>Three simple steps</h2>
-  <p>From sign up to your first opportunity.</p>
-
-  <div>
-    <div></div>
-
-    <div>
-      <div>1</div>
-      <div>
-        <h3>Create your profile</h3>
-        <p>Add your skills, education and portfolio links.</p>
+  <div className="relative mt-6">
+    
+<div className="relative flex gap-4 mb-5">
+  <div className="flex-none w-10 h-10 rounded-full bg-[#FB7185] text-[#042F2E] font-medium flex items-center justify-center">1</div>
+  <div className="flex-1 rounded-2xl p-4 bg-white/10 border border-white/20">
+    <h3 className="text-base font-medium text-[#F0FDFA]">Create your profile</h3>
+  <p className="mt-1 text-sm text-[#CCFBF1]">Add your skills, education and portfolio links.</p>
+  </div>
+</div>
+  
+    <div className="relative flex gap-4 mb-5">
+      <div className="flex-none w-10 h-10 rounded-full bg-[#FB7185] text-[#042F2E] font-medium flex items-center justify-center">2</div>
+      <div className="flex-1 rounded-2xl p-4 bg-white/10 border border-white/20">
+        <h3 className="text-base font-medium text-[#F0FDFA]">Search and save</h3>
+        <p className="mt-1 text-sm text-[#CCFBF1]">Filter by category, location and type. Bookmark your favourites.</p>
       </div>
     </div>
 
-    <div>
-      <div>2</div>
-      <div>
-        <h3>Search and save</h3>
-        <p>Filter by category, location and type. Bookmark your favourites.</p>
-      </div>
-    </div>
-
-    <div>
-      <div>3</div>
-      <div>
-        <h3>Apply and track</h3>
-        <p>See if you are submitted, shortlisted, accepted or rejected.</p>
+    <div className="relative flex gap-4 mb-5">
+      <div className="flex-none w-10 h-10 rounded-full bg-[#FB7185] text-[#042F2E] font-medium flex items-center justify-center">3</div>
+      <div className="flex-1 rounded-2xl p-4 bg-white/10 border border-white/20">
+        <h3 className="text-base font-medium text-[#F0FDFA]">Apply and track</h3>
+        <p className="mt-1 text-sm text-[#CCFBF1]">See if you are submitted, shortlisted, accepted or rejected.</p>
       </div>
     </div>
   </div>
