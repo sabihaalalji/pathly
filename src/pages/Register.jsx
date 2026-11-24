@@ -6,7 +6,6 @@ function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  // Reads ?role=seeker or ?role=provider from the link
   const [searchParams] = useSearchParams();
   const startRole = searchParams.get("role") === "provider" ? "provider" : "seeker";
 
@@ -17,14 +16,18 @@ function Register() {
     role: startRole,
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const result = register(form.name, form.email, form.password, form.role);
+    setError("");
+    setLoading(true);
+    const result = await register(form.name, form.email, form.password, form.role);
+    setLoading(false);
     if (!result.ok) {
       setError(result.message);
       return;
@@ -38,31 +41,9 @@ function Register() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <input
-        name="name"
-        placeholder="Full name"
-        value={form.name}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
+      <input name="name" placeholder="Full name" value={form.name} onChange={handleChange} required />
+      <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+      <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} required />
 
       <label>I want to join as:</label>
       <select name="role" value={form.role} onChange={handleChange}>
@@ -70,11 +51,11 @@ function Register() {
         <option value="provider">Opportunity Provider</option>
       </select>
 
-      <button type="submit">Create account</button>
+      <button type="submit" disabled={loading}>
+        {loading ? "Please wait..." : "Create account"}
+      </button>
 
-      <p>
-        Already have an account? <Link to="/login">Log in</Link>
-      </p>
+      <p>Already have an account? <Link to="/login">Log in</Link></p>
     </form>
   );
 }
