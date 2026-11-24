@@ -83,6 +83,42 @@ export default function Home() {
   </div>
 </section>
 
+
+
+<section>
+  <p>HOW IT WORKS</p>
+  <h2>Three simple steps</h2>
+  <p>From sign up to your first opportunity.</p>
+
+  <div>
+    <div></div>
+
+    <div>
+      <div>1</div>
+      <div>
+        <h3>Create your profile</h3>
+        <p>Add your skills, education and portfolio links.</p>
+      </div>
+    </div>
+
+    <div>
+      <div>2</div>
+      <div>
+        <h3>Search and save</h3>
+        <p>Filter by category, location and type. Bookmark your favourites.</p>
+      </div>
+    </div>
+
+    <div>
+      <div>3</div>
+      <div>
+        <h3>Apply and track</h3>
+        <p>See if you are submitted, shortlisted, accepted or rejected.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </>
   );
 }
