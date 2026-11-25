@@ -13,6 +13,9 @@ function Opportunities() {
   const handleViewDetails = (job) => {
   setSelectedOpportunity(job);
 };
+const handleBack = () => {
+  setSelectedOpportunity(null);
+};
   
 
   useEffect(() => {
@@ -45,6 +48,15 @@ function Opportunities() {
 
     return matchesSearch && matchesCategory && matchesLocation && matchesJobType;
   });
+
+  if (selectedOpportunity) {
+  return (
+    <OpportunityDetails
+      opportunity={selectedOpportunity}
+      onBack={handleBack}
+    />
+  );
+}
 
   return (
     <div>
