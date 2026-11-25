@@ -12,7 +12,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Opportunities from "./pages/Opportunities";
-
+import Bookmarks from "./pages/Bookmarks";
 export default function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
 
@@ -66,6 +66,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/bookmarks" element={<Bookmarks />} /> 
 
         <Route
           path="/apply"
