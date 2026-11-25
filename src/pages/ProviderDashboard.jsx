@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { opportunities as initialOpportunities } from "../data/opportunities";
 import OpportunityForm from "../components/OpportunityForm";
+import ProviderStats from "../components/ProviderStats";
 
 function ProviderDashboard() {
 const [opportunities, setOpportunities] = useState( initialOpportunities );
@@ -26,12 +27,18 @@ function handleDeleteOpportunity(id) {
    
   // Shows only opportunities belonging to this provider
 const myOpportunities = opportunities.filter(  (opportunity) => opportunity.providerId === currentProviderId);
+const today = new Date().toISOString().split("T")[0];
+const activeOpportunities = myOpportunities.filter( (opportunity) => opportunity.closingDate >= today);
+const expiredOpportunities = myOpportunities.filter( (opportunity) => opportunity.closingDate < today);
 
  return (
     <div className="min-h-screen bg-[#F0FDFA] p-6">
       <div className="mx-auto max-w-6xl">
         <h1 className="text-3xl font-bold text-[#042F2E]"> Provider Dashboard</h1>
         <p className="mt-2 text-[#134E4A]"> Manage your opportunities and track your listings. </p>
+        <div className="mt-8">
+  <ProviderStats total={myOpportunities.length} active={activeOpportunities.length} expired={expiredOpportunities.length}/>
+</div>
         <div className="mt-8">
           <OpportunityForm onAddOpportunity={handleAddOpportunity} providerId={currentProviderId} onCancelEdit={()=> setEditingOpportunity(null)}  editingOpportunity={editingOpportunity} onUpdateOpportunity={handleUpdateOpportunity}/>
         </div>
