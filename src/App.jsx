@@ -35,17 +35,17 @@ localStorage.setItem( storageKey, JSON.stringify([...applications, newApplicatio
   catch {setSubmissionMessage('Could not save your application. Please try again.')}
   }
 
-  return (
-    <>
-      <Opportunities />
+return (
+  <>
+  <Opportunities />
 
-      <section>
-        <h2>Apply for an opportunity</h2>
-        <ApplicationForm onApply={handleApply} />
-        {submissionMessage && <p>{submissionMessage}</p>}
-      </section>
-    </>
-  )
+  <section>
+    <h2>Apply for an opportunity</h2>
+    <ApplicationForm onApply={handleApply} />
+    {submissionMessage && <p>{submissionMessage}</p>}
+  </section>
+  </>
+)
 }
 
 export default App
