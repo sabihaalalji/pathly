@@ -11,10 +11,22 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[#042F2E] text-white px-5 py-4 flex justify-between items-center">
-<Link to="/" className="text-large font-medium">Pathly</Link>
-        <div>
-      <Link to="/login" className="border border-white/45 rounded-full px-4 py-1.5">Login</Link>
-      <Link to="/register" className="bg-[#FB7185] text-[#042F2E] rounded-full px-4 py-1.5 font-medium ml-2">Register</Link>
+      <Link to="/" className="text-large font-medium">
+        Pathly
+      </Link>
+      <div>
+        <Link
+          to="/login"
+          className="border border-white/45 rounded-full px-4 py-1.5"
+        >
+          Login
+        </Link>
+        <Link
+          to="/register"
+          className="bg-[#FB7185] text-[#042F2E] rounded-full px-4 py-1.5 font-medium ml-2"
+        >
+          Register
+        </Link>
       </div>
     </nav>
   );
