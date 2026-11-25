@@ -18,6 +18,11 @@ setOpportunities((previousOpportunities) => previousOpportunities.map((opportuni
 
 setEditingOpportunity(null);
   }
+
+  // Delete an opportunity
+function handleDeleteOpportunity(id) {
+  setOpportunities((previousOpportunities) => previousOpportunities.filter((opportunity) => opportunity.id !== id));
+}
    
   // Shows only opportunities belonging to this provider
 const myOpportunities = opportunities.filter(  (opportunity) => opportunity.providerId === currentProviderId);
@@ -40,6 +45,9 @@ const myOpportunities = opportunities.filter(  (opportunity) => opportunity.prov
               <p className="text-[#134E4A]"> {opportunity.organization} </p>
               <p className="mt-2 text-sm"> Deadline: {opportunity.closingDate} </p>
                <button onClick={() => setEditingOpportunity(opportunity)}className="mt-4 rounded-lg bg-[#0F766E] px-4 py-2 font-semibold text-white hover:bg-[#134E4A]">Edit</button>
+               <button
+  onClick={() => handleDeleteOpportunity(opportunity.id)}
+  className="mt-4 ml-3 rounded-lg bg-[#FB7185] px-4 py-2 font-semibold text-white hover:bg-red-600"> Delete</button>
             </div>
           ))}
         </div>
