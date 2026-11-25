@@ -44,8 +44,8 @@ return (
     <ApplicationForm onApply={handleApply} />
     {submissionMessage && <p>{submissionMessage}</p>}
   </section>
-  </>
-)
+    </>
+  )
 }
 
 export default App
