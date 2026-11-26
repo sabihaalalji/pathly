@@ -52,7 +52,7 @@ export default function Home() {
     </div>
 
     <div className="rounded-2xl p-4 bg-white border border-[#5EEAD4]">
-      <h3 className="text-lg font-medium text-[#042F2E]">Internships</h3>
+      <h3 className="text-lg font-medium text-[#042F2E]">Opportunity</h3>
       <p className="mt-1 text-xs text-[#134E4A]">Get your first experience</p>
   
     </div>
