@@ -15,9 +15,9 @@ import RoleInfo from "./pages/RoleInfo.jsx";
 import Bookmarks from "./pages/Bookmarks";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import CareerGuidance from "./pages/CareerGuidance";
+import { useAuth } from "./context/AuthContext";
 
 const storageKey = "pathly.applications";
-const seekerId = "sample-seeker";
 
 function readApplications() {
   const saved = JSON.parse(localStorage.getItem(storageKey) ?? "[]");
@@ -41,11 +41,22 @@ export default function App() {
     }
   });
 
-  const myApplications = applications.filter(
-    (application) => application.seekerId === seekerId
-  );
+  const { user } = useAuth();
+
+const seekerId =
+  user?.role === "seeker" && user.id != null ? String(user.id) : null;
+
+const myApplications = seekerId
+  ? applications.filter(
+      (application) => String(application.seekerId) === seekerId
+    )
+  : [];
 
   function handleApply(answer) {
+    if (!seekerId){
+      setSubmissionMessage("Sign in with a seeker account to apply.");
+      return false;
+    }
     if(!selectedOpportunity?.id){
       setSubmissionMessage("Choose an opportunity before applying.");
       return;
@@ -129,6 +140,7 @@ export default function App() {
         <Route
           path="/apply"
           element={
+            <ProtectedRoute requiredRole="seeker">
               <main className="min-h-[75vh] bg-[#F0FDFA] px-4 py-8 font-sans text-[#042F2E] sm:px-6 sm:py-12">
               <section className="mx-auto max-w-2xl rounded-2xl border border-teal-100 bg-white p-5 shadow-sm sm:p-6">
               <h1 className="mb-5 text-2xl font-bold">
@@ -145,10 +157,12 @@ export default function App() {
               </Link>
               </section>
               </main>
+              </ProtectedRoute>
           }
         />
         <Route path="/my-applications"
         element={
+          <ProtectedRoute requiredRole="seeker">
           <main className="min-h-[75vh] bg-[#F0FDFA] px-4 py-8 font-sans text-[#042F2E] sm:px-6 sm:py-12">
             <section className="mx-auto max-w-3xl rounded-2xl border border-teal-100 bg-white p-5 shadow-sm sm:p-6">
               <h1 className="mb-5 text-2xl font-bold">
@@ -181,6 +195,7 @@ export default function App() {
                 )}
             </section>
           </main>
+          </ProtectedRoute>
         }
         />
 
