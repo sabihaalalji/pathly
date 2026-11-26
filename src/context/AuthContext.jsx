@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 async function callApi(payload) {
+  console.log("API URL:", import.meta.env.VITE_API_URL);
   try {
     const res = await fetch(import.meta.env.VITE_API_URL, {
       method: "POST",
@@ -11,6 +12,7 @@ async function callApi(payload) {
     });
     return await res.json();
   } catch (err) {
+    console.log("API ERROR:", err);
     return { ok: false, message: "Could not reach the server. Try again." };
   }
 }

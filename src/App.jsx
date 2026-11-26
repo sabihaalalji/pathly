@@ -13,7 +13,12 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Opportunities from "./pages/Opportunities";
+
+import ApplicationForm from "./components/ApplicationForm.jsx";
+import RoleInfo from "./pages/RoleInfo.jsx";
+
 import Bookmarks from "./pages/Bookmarks";
+
 export default function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
 
@@ -66,7 +71,11 @@ localStorage.setItem( storageKey, JSON.stringify([...applications, newApplicatio
         <Route path="/register" element={<Register />} />
 
         <Route path="/opportunities" element={<Opportunities />} />
+
+        <Route path="/join/:type" element={<RoleInfo />} />
+
         <Route path="/bookmarks" element={<Bookmarks />} /> 
+
 
         <Route
           path="/apply"
