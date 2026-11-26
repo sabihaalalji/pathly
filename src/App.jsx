@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -15,19 +16,39 @@ import Opportunities from "./pages/Opportunities";
 import RoleInfo from "./pages/RoleInfo.jsx";
 import Bookmarks from "./pages/Bookmarks";
 
+const storageKey = "pathly.applications";
+const seekerId = "sample-seeker";
+const opportunityId = "sample-internship";
+
+function readApplications() {
+  const saved = JSON.parse(localStorage.getItem(storageKey) ?? "[]");
+
+  if (!Array.isArray(saved)) {
+    throw new Error("Invalid saved applications");
+  }
+
+  return saved;
+}
+
 export default function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
+  const [applications, setApplications] = useState(() => {
+    try {
+      return readApplications();
+    } catch {
+      return [];
+    }
+  });
+
+  const myApplications = applications.filter(
+    (application) => application.seekerId === seekerId
+  );
 
   function handleApply(answer) {
-    const seekerId = "sample-seeker";
-    const opportunityId = "sample-internship";
-    const storageKey = "pathly.applications";
-
     try {
-      const savedData = localStorage.getItem(storageKey);
-      const applications = savedData ? JSON.parse(savedData) : [];
+      const savedApplications = readApplications();
 
-      const alreadyApplied = applications.some(
+      const alreadyApplied = savedApplications.some(
         (application) =>
           application.seekerId === seekerId &&
           application.opportunityId === opportunityId
@@ -47,11 +68,9 @@ export default function App() {
         submittedAt: new Date().toISOString(),
       };
 
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify([...applications, newApplication])
-      );
-
+      const updatedApplications = [...savedApplications, newApplication];
+      localStorage.setItem(storageKey, JSON.stringify(updatedApplications));
+      setApplications(updatedApplications);
       setSubmissionMessage("Application submitted.");
     } catch {
       setSubmissionMessage("Could not save your application. Please try again.");
@@ -73,11 +92,30 @@ export default function App() {
         <Route
           path="/apply"
           element={
-            <section>
-              <h2>Apply for an opportunity</h2>
-              <ApplicationForm onApply={handleApply} />
-              {submissionMessage && <p>{submissionMessage}</p>}
-            </section>
+            <>
+              <section>
+                <h2>Apply for an opportunity</h2>
+                <ApplicationForm onApply={handleApply} />
+                {submissionMessage && <p>{submissionMessage}</p>}
+              </section>
+
+              <section>
+                <h2>My Applications</h2>
+                {myApplications.length === 0 ? (
+                  <p>You have not submitted any applications yet.</p>
+                ) : (
+                  <ul>
+                    {myApplications.map((application) => (
+                      <li key={application.id}>
+                        <p>Opportunity: {application.opportunityId}</p>
+                        <p>Status: {application.status}</p>
+                        <p>{application.statement}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            </>
           }
         />
 
