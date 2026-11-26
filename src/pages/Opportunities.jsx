@@ -1,4 +1,3 @@
-
 import OpportunityDetails from "./OpportunityDetails";
 import { useState, useEffect } from "react";
 import OpportunityCard from "../components/OpportunityCard";
