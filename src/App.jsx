@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
-import ApplicationForm from "./components/ApplicationForm.jsx";
+import ApplicationForm from "./components/ApplicationForm";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -15,6 +15,8 @@ import Profile from "./pages/Profile";
 import Opportunities from "./pages/Opportunities";
 import RoleInfo from "./pages/RoleInfo.jsx";
 import Bookmarks from "./pages/Bookmarks";
+import ProviderDashboard from "./pages/ProviderDashboard";
+import CareerGuidance from "./pages/CareerGuidance";
 
 const storageKey = "pathly.applications";
 const seekerId = "sample-seeker";
@@ -82,12 +84,13 @@ export default function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/opportunities" element={<Opportunities />} />
-        <Route path="/join/:type" element={<RoleInfo />} />
-        <Route path="/bookmarks" element={<Bookmarks />} />
+  <Route path="/" element={<Register />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/home" element={<Home />} />
+  <Route path="/opportunities" element={<Opportunities />} />
+  <Route path="/join/:type" element={<RoleInfo />} />
+  <Route path="/bookmarks" element={<Bookmarks />} />
 
         <Route
           path="/apply"
@@ -135,6 +138,16 @@ export default function App() {
               <Profile />
             </ProtectedRoute>
           }
+        />
+
+        <Route
+          path="/provider-dashboard"
+          element={<ProviderDashboard />}
+        />
+
+        <Route
+          path="/career-guidance"
+          element={<CareerGuidance />}
         />
       </Routes>
 
