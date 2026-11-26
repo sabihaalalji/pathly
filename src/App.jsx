@@ -76,6 +76,34 @@ export default function App() {
       setSubmissionMessage("Could not save your application. Please try again.");
     }
   }
+  function handleStatusChange(applicationId, nextStatus, ownedOpportunities){
+    const allowedStatuses=["Shortlisted", "Accepted", "Rejected"];
+    if(!allowedStatuses.includes(nextStatus)){
+      return "Choose a valid application status.";
+    }
+    try{
+      const savedApplications=readApplications();
+      const application=savedApplications.find(
+        (item)=>item.id === applicationId
+      );
+      if(!application){
+        return "This application could not be found.";
+      }
+      const ownsListing=ownedOpportunities.some(
+        (opportunity)=>String(opportunity.id) === String(application.opportunityId)
+      );
+      if(!ownsListing){
+        return "You can only review application for your own listing.";
+      }
+      const updatedApplications=savedApplications.map((item)=>
+      item.id === applicationId ? {...item, status:nextStatus}: item);
+      localStorage.setItem(storageKey,JSON.stringify(updatedApplications));
+      setApplications(updatedApplications);
+      return "";
+    } catch{
+      return "Could not update the application status.Please try again.";
+    }
+  }
 
   return (
     <>
