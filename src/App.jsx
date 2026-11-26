@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ApplicationForm from "./components/ApplicationForm.jsx";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Opportunities from "./pages/Opportunities";
-import ApplicationForm from "./components/ApplicationForm.jsx";
 import RoleInfo from "./pages/RoleInfo.jsx";
-
+import Bookmarks from "./pages/Bookmarks";
 
 export default function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
@@ -57,14 +59,17 @@ export default function App() {
   }
 
   return (
-    <div>
+    <>
       <Navbar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/opportunities" element={<Opportunities />} />
         <Route path="/join/:type" element={<RoleInfo />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
+
         <Route
           path="/apply"
           element={
@@ -75,6 +80,7 @@ export default function App() {
             </section>
           }
         />
+
         <Route
           path="/dashboard"
           element={
@@ -83,6 +89,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/profile"
           element={
@@ -92,7 +99,8 @@ export default function App() {
           }
         />
       </Routes>
+
       <Footer />
-    </div>
+    </>
   );
 }
