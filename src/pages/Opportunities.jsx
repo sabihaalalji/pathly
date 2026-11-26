@@ -2,7 +2,7 @@ import OpportunityDetails from "./OpportunityDetails";
 import { useState, useEffect } from "react";
 import OpportunityCard from "../components/OpportunityCard";
 
-function Opportunities() {
+function Opportunities({onViewDetails}) {
   const [opportunities, setOpportunities] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
@@ -94,6 +94,10 @@ function Opportunities() {
       {filteredOpportunities.map((job) => (
         <OpportunityCard key={job.id} opportunity={job} onViewDetails={handleViewDetails} />
       ))}
+      
+      {selectedOpportunity && (
+  <OpportunityDetails opportunity={selectedOpportunity} />
+)}
 
       <p>
         Powered by{" "}
