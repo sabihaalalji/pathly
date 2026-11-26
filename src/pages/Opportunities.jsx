@@ -48,11 +48,20 @@ function Opportunities() {
 
   useEffect(() => {
     async function fetchOpportunities() {
-      const response = await fetch(
-        "https://devglobaljobs.com/api/v1/jobs?limit=100"
-      );
-      const data = await response.json();
-      setOpportunities(data.jobs);
+      try {
+        const response = await fetch(
+          "https://devglobaljobs.com/api/v1/jobs?limit=100"
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch opportunities");
+        }
+
+        const data = await response.json();
+        setOpportunities(data.jobs || []);
+      } catch (error) {
+        console.error("Error fetching opportunities:", error);
+      }
     }
 
     fetchOpportunities();
@@ -193,7 +202,7 @@ function Opportunities() {
         </div>
 
         {filteredOpportunities.length > 0 ? (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {filteredOpportunities.map((job) => (
               <OpportunityCard
                 key={job.id}

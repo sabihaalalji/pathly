@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
-import ApplicationForm from "./components/ApplicationForm.jsx";
+import ApplicationForm from "./components/ApplicationForm";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -14,6 +14,8 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Opportunities from "./pages/Opportunities";
 import Bookmarks from "./pages/Bookmarks";
+import ProviderDashboard from "./pages/ProviderDashboard";
+import CareerGuidance from "./pages/CareerGuidance";
 
 export default function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
@@ -98,11 +100,20 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/provider-dashboard"
+          element={<ProviderDashboard />}
+        />
+
+        <Route
+          path="/career-guidance"
+          element={<CareerGuidance />}
+        />
       </Routes>
 
       <Footer />
     </>
   );
 }
-
 

@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
@@ -78,6 +79,22 @@ export default function OpportunityDetails({ opportunity, onBack }) {
 
   const details = job || opportunity;
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const deadline = details.closingDate
+    ? new Date(details.closingDate)
+    : null;
+
+  if (deadline) {
+    deadline.setHours(23, 59, 59, 999);
+  }
+
+  const isExpired =
+    !deadline ||
+    Number.isNaN(deadline.getTime()) ||
+    deadline < today;
+
   return (
     <main className="min-h-screen bg-[#F0FDFA] px-5 py-12 font-sans text-[#042F2E] sm:px-8">
       <div className="mx-auto max-w-4xl">
@@ -86,7 +103,7 @@ export default function OpportunityDetails({ opportunity, onBack }) {
           onClick={onBack}
           className="mb-8 text-sm font-semibold text-[#0F766E] transition hover:text-[#FB7185]"
         >
-           Back to Opportunities
+          Back to Opportunities
         </button>
 
         <div className="rounded-2xl border border-[#D8EFEB] bg-white p-6 shadow-sm sm:p-10">
@@ -177,12 +194,21 @@ export default function OpportunityDetails({ opportunity, onBack }) {
           </section>
 
           <div className="mt-10 flex flex-wrap gap-4">
-           <Link
-  to="/apply"
-  className="rounded-xl bg-[#0F766E] px-7 py-3 font-semibold text-white transition hover:bg-[#134E4A]"
->
-  Apply Now
-</Link>
+            {isExpired ? (
+              <button
+                disabled
+                className="cursor-not-allowed rounded-xl bg-gray-400 px-7 py-3 font-semibold text-white"
+              >
+                Applications Closed
+              </button>
+            ) : (
+              <Link
+                to="/apply"
+                className="rounded-xl bg-[#0F766E] px-7 py-3 font-semibold text-white transition hover:bg-[#134E4A]"
+              >
+                Apply Now
+              </Link>
+            )}
 
             <button
               onClick={onBack}
@@ -210,4 +236,5 @@ export default function OpportunityDetails({ opportunity, onBack }) {
     </main>
   );
 }
+
 
