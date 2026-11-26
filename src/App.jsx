@@ -10,6 +10,8 @@ import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Opportunities from "./pages/Opportunities";
 import ApplicationForm from "./components/ApplicationForm.jsx";
+import RoleInfo from "./pages/RoleInfo.jsx";
+
 
 export default function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
@@ -62,6 +64,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/join/:type" element={<RoleInfo />} />
         <Route
           path="/apply"
           element={
