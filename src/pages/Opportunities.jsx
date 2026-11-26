@@ -139,7 +139,7 @@ function Opportunities() {
           <p className="text-sm text-[#52736F]">{listing.organization}</p>
 
           {isExpired ? (
-            <p className="mt-3 inline-flex rounded-full bg-slate-100 px-3 py-1.5 text-sm font-semibold text-slate-700">Applications closed</p>
+            <p className="mt-3 inline-flex rounded-full bg-slate-700 px-3 py-1.5 text-sm font-semibold text-white">Applications closed</p>
           ) : (
             <Link
               to="/apply"
