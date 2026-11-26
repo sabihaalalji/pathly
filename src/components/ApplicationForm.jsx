@@ -10,7 +10,10 @@ export default function ApplicationForm({onApply}){
             return
         }
         setError('')
-        onApply(answer)
+        const saved=onApply(answer);
+        if (saved === true){
+            setStatement("");
+        }
     }
     return(
         <>

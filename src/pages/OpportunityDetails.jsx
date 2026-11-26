@@ -204,6 +204,12 @@ export default function OpportunityDetails({ opportunity, onBack }) {
             ) : (
               <Link
                 to="/apply"
+                state={{
+                  opportunity:{
+                    id:`external:${opportunity.id}`,
+                    title:opportunity.title,
+                  },
+                }}
                 className="rounded-xl bg-[#0F766E] px-7 py-3 font-semibold text-white transition hover:bg-[#134E4A]"
               >
                 Apply Now
