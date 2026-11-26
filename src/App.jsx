@@ -84,12 +84,13 @@ export default function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/opportunities" element={<Opportunities />} />
-        <Route path="/join/:type" element={<RoleInfo />} />
-        <Route path="/bookmarks" element={<Bookmarks />} />
+  <Route path="/" element={<Register />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/home" element={<Home />} />
+  <Route path="/opportunities" element={<Opportunities />} />
+  <Route path="/join/:type" element={<RoleInfo />} />
+  <Route path="/bookmarks" element={<Bookmarks />} />
 
         <Route
           path="/apply"

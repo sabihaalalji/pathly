@@ -24,7 +24,7 @@ export default function Login() {
       setError(result.message);
       return;
     }
-    navigate("/");
+   navigate("/home");
   }
 
   const inputClass = "mt-4 w-full rounded-xl bg-white/10 border border-white/30 px-4 py-3 text-sm text-[#F0FDFA] placeholder:text-[#99F6E4]/70 outline-none focus:border-[#FB7185]";

@@ -1,3 +1,4 @@
+
 import heroImg from "../assets/herobg.jpg";
 import { Link } from "react-router-dom";
 
@@ -16,18 +17,18 @@ export default function Home() {
               application
             </p>
             <div className="mt-6 flex flex-col gap-3 max-w-md">
-      <Link
-  to="/join/seekers"
-  className="block bg-[#FB7185] text-[#042F2E] py-3 rounded-lg text-center font-medium transition hover:bg-[#F43F5E] active:scale-95"
->
-  Find opportunities
-</Link>
-<Link
-  to="/join/providers"
-  className="block border border-[#5EEAD4] text-white py-3 rounded-lg text-center font-medium transition hover:bg-white/10 active:scale-95"
->
-  Post an opportunity
-</Link>
+              <Link
+                to="/opportunities"
+                className="block bg-[#FB7185] text-[#042F2E] py-3 rounded-lg text-center font-medium transition hover:bg-[#F43F5E] active:scale-95"
+              >
+                Find opportunities
+              </Link>
+              <Link
+                to="/provider-dashboard"
+                className="block border border-[#5EEAD4] text-white py-3 rounded-lg text-center font-medium transition hover:bg-white/10 active:scale-95"
+              >
+                Post an opportunity
+              </Link>
             </div>
 
             <div className="mt-7 bg-white/10 border border-white/25 rounded-2xl p-4 max-w-md">
@@ -133,7 +134,7 @@ export default function Home() {
             </div>
 
             <Link
-              to="/join/seekers"
+              to="/opportunities"
               className="mt-6 block w-full rounded-xl py-3 text-center text-base font-medium bg-[#042F2E] text-[#F0FDFA]"
             >
               Join as a seeker
@@ -154,7 +155,7 @@ export default function Home() {
             </div>
 
             <Link
-              to="/join/providers"
+              to="/provider-dashboard"
               className="mt-6 block w-full rounded-xl py-3 text-center text-base font-medium bg-[#FB7185] text-[#042F2E]"
             >
               Join as a provider
@@ -177,18 +178,18 @@ export default function Home() {
             </p>
 
             <div className="mt-6 mx-auto flex flex-col gap-3 max-w-xs">
-<Link
-  to="/register"
-  className="block bg-[#FB7185] text-[#042F2E] py-3 rounded-lg text-center text-base font-medium transition hover:bg-[#F43F5E] active:scale-95"
->
-  Create free account
-</Link>
-<Link
-  to="/login"
-  className="block border border-[#5EEAD4] text-[#F0FDFA] py-3 rounded-lg text-center text-base font-medium transition hover:bg-white/10 active:scale-95"
->
-  Log in
-</Link>
+              <Link
+                to="/register"
+                className="block bg-[#FB7185] text-[#042F2E] py-3 rounded-lg text-center text-base font-medium transition hover:bg-[#F43F5E] active:scale-95"
+              >
+                Create free account
+              </Link>
+              <Link
+                to="/login"
+                className="block border border-[#5EEAD4] text-[#F0FDFA] py-3 rounded-lg text-center text-base font-medium transition hover:bg-white/10 active:scale-95"
+              >
+                Log in
+              </Link>
             </div>
           </div>
         </div>
