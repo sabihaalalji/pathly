@@ -1,7 +1,7 @@
 function cleanDescription(description) {
   return description.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
-function OpportunityCard({ opportunity, onViewDetails }) {
+function OpportunityCard({ opportunity, onViewDetails, isBookmarked, onToggleBookmark }) {
   return (
     <div className="opportunity-card">
       <h3>{opportunity.title}</h3>
@@ -17,6 +17,9 @@ function OpportunityCard({ opportunity, onViewDetails }) {
 })}</p>
       <button onClick={() => onViewDetails(opportunity)}>
   View Details
+</button>
+<button onClick={() => onToggleBookmark(opportunity)}>
+  {isBookmarked ? "Remove Bookmark" : "Bookmark"}
 </button>
     </div>
   );
