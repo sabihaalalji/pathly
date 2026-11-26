@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import ApplicationForm from './components/ApplicationForm.jsx'
-import Opportunities from './pages/Opportunities'
+import ApplicationForm from './components/ApplicationForm.jsx';
+import Opportunities from './pages/Opportunities';
+import ProviderDashboard from './pages/ProviderDashboard';
+import CareerGuidance from './pages/CareerGuidance';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 const [submissionMessage, setSubmissionMessage] = useState('')
@@ -35,17 +38,25 @@ localStorage.setItem( storageKey, JSON.stringify([...applications, newApplicatio
   catch {setSubmissionMessage('Could not save your application. Please try again.')}
   }
 
-return (
-  <>
-  <Opportunities />
 
-  <section>
+return (
+<Routes>
+    <Route path="/"element={
+<>
+  <Opportunities />
+<section>
     <h2>Apply for an opportunity</h2>
     <ApplicationForm onApply={handleApply} />
     {submissionMessage && <p>{submissionMessage}</p>}
-  </section>
-    </>
-  )
+</section>
+</>
+}
+    />
+
+    <Route path="/provider-dashboard" element={<ProviderDashboard />} />
+    <Route path="/career-guidance" element={<CareerGuidance />} />
+  </Routes>
+);
 }
 
 export default App
