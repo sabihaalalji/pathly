@@ -139,7 +139,7 @@ function Opportunities() {
           <p className="text-sm text-[#52736F]">{listing.organization}</p>
 
           {isExpired ? (
-            <p className="mt-3 inline-flex rounded-full bg-slate-700 px-3 py-1.5 text-sm font-semibold text-white">Applications closed</p>
+            <p className="mt-3 inline-block min-w-44 rounded-lg bg-slate-700 px-4 py-2 text-center text-sm font-semibold text-white">Applications closed</p>
           ) : (
             <Link
               to="/apply"
@@ -149,7 +149,7 @@ function Opportunities() {
                   title: listing.title,
                 },
               }}
-              className="mt-3 inline-block rounded-lg bg-[#FB7185] px-4 py-2 text-sm font-semibold"
+              className="mt-3 inline-block min-w-44 rounded-lg bg-[#FB7185] px-4 py-2 text-center text-sm font-semibold text-[#042F2E]"
             >
               Apply on Pathly
             </Link>
