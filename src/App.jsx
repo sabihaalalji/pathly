@@ -1,38 +1,62 @@
-import { useState } from 'react'
-import ApplicationForm from './components/ApplicationForm.jsx'
-import Opportunities from './pages/Opportunities'
 
-function App() {
-  const [submissionMessage, setSubmissionMessage] = useState('')
-  const [applications,setApplications]=useState(()=>{
-    try{
-      const saved=JSON.parse(localStorage.getItem('pathly.applications') ?? '[]')
-      return Array.isArray(saved) ? saved:[]
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ApplicationForm from "./components/ApplicationForm.jsx";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import Opportunities from "./pages/Opportunities";
+import RoleInfo from "./pages/RoleInfo.jsx";
+import Bookmarks from "./pages/Bookmarks";
+
+const storageKey = "pathly.applications";
+const seekerId = "sample-seeker";
+const opportunityId = "sample-internship";
+
+function readApplications() {
+  const saved = JSON.parse(localStorage.getItem(storageKey) ?? "[]");
+
+  if (!Array.isArray(saved)) {
+    throw new Error("Invalid saved applications");
+  }
+
+  return saved;
+}
+
+export default function App() {
+  const [submissionMessage, setSubmissionMessage] = useState("");
+  const [applications, setApplications] = useState(() => {
+    try {
+      return readApplications();
+    } catch {
+      return [];
     }
-    catch{
-      return[]
-    }
-  })
-  const myApplications=applications.filter((application)=>application.seekerId ==='sample-seeker')
+  });
+
+  const myApplications = applications.filter(
+    (application) => application.seekerId === seekerId
+  );
 
   function handleApply(answer) {
-    const seekerId = 'sample-seeker'
-    const opportunityId = 'sample-internship'
-    const storageKey = 'pathly.applications'
-
     try {
-      const savedData = localStorage.getItem(storageKey)
-      const applications = savedData ? JSON.parse(savedData) : []
+      const savedApplications = readApplications();
 
-      const alreadyApplied = applications.some(
+      const alreadyApplied = savedApplications.some(
         (application) =>
           application.seekerId === seekerId &&
           application.opportunityId === opportunityId
-      )
+      );
 
       if (alreadyApplied) {
-        setSubmissionMessage('You have already applied for this opportunity.')
-        return
+        setSubmissionMessage("You have already applied for this opportunity.");
+        return;
       }
 
       const newApplication = {
@@ -40,47 +64,81 @@ function App() {
         seekerId,
         opportunityId,
         statement: answer,
-        status: 'Submitted',
+        status: "Submitted",
         submittedAt: new Date().toISOString(),
-      }
+      };
 
-     const updatedApplications=[...applications,newApplication]
-     localStorage.setItem(storageKey,JSON.stringify(updatedApplications))
-     setApplications(updatedApplications)
-
-      setSubmissionMessage('Application submitted.')
+      const updatedApplications = [...savedApplications, newApplication];
+      localStorage.setItem(storageKey, JSON.stringify(updatedApplications));
+      setApplications(updatedApplications);
+      setSubmissionMessage("Application submitted.");
     } catch {
-      setSubmissionMessage('Could not save your application. Please try again.')
+      setSubmissionMessage("Could not save your application. Please try again.");
     }
   }
 
   return (
     <>
-      <Opportunities />
+      <Navbar />
 
-      <section>
-        <h2>Apply for an opportunity</h2>
-        <ApplicationForm onApply={handleApply} />
-        {submissionMessage && <p>{submissionMessage}</p>}
-      </section>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/join/:type" element={<RoleInfo />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
 
-      <section>
-        <h2>My Applications</h2>
-        {myApplications.length ===0 ?(
-          <p>You have not submitted any applications yet.</p>):(
-            <ul>
-              {myApplications.map((application)=>(
-                <li key={application.id}>
-                    <p>Opportunity: {application.opportunityId}</p>
-                    <p>Status: {application.status}</p>
-                    <p>{application.statement}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-      </section>
+        <Route
+          path="/apply"
+          element={
+            <>
+              <section>
+                <h2>Apply for an opportunity</h2>
+                <ApplicationForm onApply={handleApply} />
+                {submissionMessage && <p>{submissionMessage}</p>}
+              </section>
+
+              <section>
+                <h2>My Applications</h2>
+                {myApplications.length === 0 ? (
+                  <p>You have not submitted any applications yet.</p>
+                ) : (
+                  <ul>
+                    {myApplications.map((application) => (
+                      <li key={application.id}>
+                        <p>Opportunity: {application.opportunityId}</p>
+                        <p>Status: {application.status}</p>
+                        <p>{application.statement}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            </>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+
+      <Footer />
     </>
-  )
+  );
 }
-
-export default App
