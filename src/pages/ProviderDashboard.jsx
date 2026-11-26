@@ -46,17 +46,35 @@ const expiredOpportunities = myOpportunities.filter( (opportunity) => opportunit
         <div className="mt-10">
           <h2 className="mb-4 text-2xl font-bold text-[#042F2E]"> My Opportunities </h2>
 
-          {myOpportunities.map((opportunity) => (
-            <div key={opportunity.id} className="mb-4 rounded-xl bg-white p-5 shadow-sm">
-              <h3 className="text-lg font-bold text-[#042F2E]"> {opportunity.title}</h3>
-              <p className="text-[#134E4A]"> {opportunity.organization} </p>
-              <p className="mt-2 text-sm"> Deadline: {opportunity.closingDate} </p>
-               <button onClick={() => setEditingOpportunity(opportunity)}className="mt-4 rounded-lg bg-[#0F766E] px-4 py-2 font-semibold text-white hover:bg-[#134E4A]">Edit</button>
-               <button
-  onClick={() => handleDeleteOpportunity(opportunity.id)}
-  className="mt-4 ml-3 rounded-lg bg-[#FB7185] px-4 py-2 font-semibold text-white hover:bg-red-600"> Delete</button>
-            </div>
-          ))}
+      
+{myOpportunities.map((opportunity) => {
+  const isExpired = opportunity.closingDate < today;
+
+  return (
+    <div key={opportunity.id} className="mb-4 rounded-xl bg-white p-5 shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h3 className="text-lg font-bold text-[#042F2E]"> {opportunity.title}</h3>
+
+        <span className={`rounded-full px-3 py-1 text-sm font-semibold ${ isExpired ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700" }`}>
+          {isExpired ? "Expired" : "Active"}
+        </span>
+      </div>
+
+      <p className="text-[#134E4A]">{opportunity.organization}</p>
+
+      <p className="mt-2 text-sm"> Deadline: {opportunity.closingDate}</p>
+
+      <button onClick={() => setEditingOpportunity(opportunity)} className="mt-4 rounded-lg bg-[#0F766E] px-4 py-2 font-semibold text-white hover:bg-[#134E4A]">
+        Edit
+      </button>
+
+      <button onClick={() => handleDeleteOpportunity(opportunity.id)} className="mt-4 ml-3 rounded-lg bg-[#FB7185] px-4 py-2 font-semibold text-white hover:bg-red-600"
+      > Delete
+      </button>
+    </div>
+  );
+})}
+
         </div>
       </div>
     </div>
