@@ -1,4 +1,5 @@
-
+import { Link } from "react-router-dom";
+import { opportunities as pathlyOpportunities } from "../data/opportunities.js";
 import { useState, useEffect } from "react";
 import OpportunityDetails from "./OpportunityDetails";
 import OpportunityCard from "../components/OpportunityCard";
@@ -118,6 +119,46 @@ function Opportunities() {
             match your interests and career goals.
           </p>
         </div>
+
+        <section className="mb-8">
+  <h2 className="mb-4 text-xl font-bold text-[#134E4A]">
+    Pathly Opportunities
+  </h2>
+
+  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {pathlyOpportunities.map((listing) => {
+       const today = new Date().toISOString().slice(0, 10);
+       const isExpired = listing.closingDate < today;
+
+       return (
+        <article
+          key={listing.id}
+          className="rounded-xl border border-[#D8EFEB] bg-white p-4"
+        >
+          <h3 className="font-semibold">{listing.title}</h3>
+          <p className="text-sm text-[#52736F]">{listing.organization}</p>
+
+          {isExpired ? (
+            <p className="mt-3 text-sm">Applications closed</p>
+          ) : (
+            <Link
+              to="/apply"
+              state={{
+                opportunity: {
+                  id: String(listing.id),
+                  title: listing.title,
+                },
+              }}
+              className="mt-3 inline-block rounded-lg bg-[#FB7185] px-4 py-2 text-sm font-semibold"
+            >
+              Apply on Pathly
+            </Link>
+          )}
+        </article>
+        );
+    })}
+  </div>
+</section>
 
         <div className="mb-8 rounded-2xl border border-[#D8EFEB] bg-white p-5 shadow-sm sm:p-6">
           <div className="mb-5">

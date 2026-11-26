@@ -8,7 +8,7 @@ export default function Applicants({
         ownedOpportunities.map((opportunity)=> String(opportunity.id))
     );
     const receivedApplications=applications.filter((application)=>
-    opportunityIds.has(String(application.opportunityIds)));
+    opportunityIds.has(String(application.opportunityId)));
 
     return(
         <section>

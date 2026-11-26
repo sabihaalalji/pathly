@@ -34,6 +34,11 @@ export default function Navbar() {
         >
           Bookmarks
         </Link>
+        <Link 
+        to="/my-applications"
+        className="border border-white/45 rounded-full px-4 py-1.5 ml-2">
+          My Applications
+        </Link>
       </div>
     </nav>
   );
