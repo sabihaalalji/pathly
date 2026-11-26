@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Opportunities from "./pages/Opportunities";
+import RoleInfo from "./pages/RoleInfo.jsx";
 import Bookmarks from "./pages/Bookmarks";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import CareerGuidance from "./pages/CareerGuidance";
@@ -68,8 +69,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
         <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/join/:type" element={<RoleInfo />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
 
         <Route
@@ -116,4 +117,3 @@ export default function App() {
     </>
   );
 }
-
