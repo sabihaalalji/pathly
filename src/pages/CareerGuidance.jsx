@@ -64,9 +64,9 @@ function CareerGuidance() {
         <h3 className="mt-4 text-xl font-bold text-[#042F2E]"> {guide.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-[#134E4A]"> {guide.description}</p>
 
-    <ul className="mt-4 space-y-2">
+    <ul className="mt-4  list-disc space-y-2 pl-5 text-sm text-[#042F2E">
     {guide.tips.map((tip, index) => (
-        <li key={index} className="flex gap-2 text-sm text-[#042F2E]"> <span className="text-[#0F766E]">✓</span>
+        <li key={index} >
         {tip}
         </li>
  ))}
