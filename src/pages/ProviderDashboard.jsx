@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { opportunities as initialOpportunities } from "../data/opportunities";
 import OpportunityForm from "../components/OpportunityForm";
 import ProviderStats from "../components/ProviderStats";
 
 function ProviderDashboard() {
-const [opportunities, setOpportunities] = useState( initialOpportunities );
+const [opportunities, setOpportunities] = useState(() => {
+const savedOpportunities = localStorage.getItem("pathly.opportunities");
+
+return savedOpportunities
+    ? JSON.parse(savedOpportunities)
+    : initialOpportunities;
+}); //<-this closes useState
+
 const [editingOpportunity, setEditingOpportunity]=useState(null);
+
+useEffect(() => {
+  localStorage.setItem(
+    "pathly.opportunities",
+    JSON.stringify(opportunities)
+  );
+}, [opportunities]);
 
   // Temporary sample provider account
 const currentProviderId = 101;
