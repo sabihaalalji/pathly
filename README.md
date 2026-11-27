@@ -1,16 +1,94 @@
-# React + Vite
+# Pathly
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Your pathway to opportunities.**
 
-Currently, two official plugins are available:
+Pathly is a web-based platform designed to help users discover job opportunities and internships, manage applications, save opportunities, and explore career guidance in one place.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **User Authentication:** Register, log in, and manage your account.
+- **Explore Opportunities:** Browse job and internship opportunities.
+- **Search and Filter:** Find opportunities based on keywords and categories.
+- **Bookmarks:** Save opportunities to revisit later.
+- **My Applications:** Track and manage submitted applications.
+- **Provider Dashboard:** Allow opportunity providers to manage opportunities and view applicants.
+- **Career Guidance:** Access career-related information and guidance.
+- **User Profile:** View and manage personal account information.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js
+- Vite
+- JavaScript
+- HTML5
+- CSS3
+- React Router
+- Context API
+- Local Storage
+- REST API
+
+## Getting Started
+
+Follow these instructions to run Pathly locally.
+
+### Prerequisites
+
+- Node.js
+- npm
+- Git
+
+### Installation
+
+1. Clone the repository:
+
+   
+   git clone https://github.com/sabihaalalji/pathly.git
+   
+
+2. Navigate into the project directory:
+
+   
+   cd pathly
+   
+
+3. Install dependencies:
+
+   
+   npm install
+   
+4. Start the development server:
+
+   
+   npm run dev
+   
+
+5. Open the local URL provided in your terminal.
+
+## Project Structure
+
+
+pathly/
+├── public/
+├── src/
+│   ├── components/
+│   ├── context/
+│   ├── pages/
+│   ├── App.jsx
+│   └── main.jsx
+├── index.html
+├── package.json
+└── README.md
+
+
+## Deployment
+
+Pathly is deployed using Vercel.
+
+## Contributors
+
+**Group 4**
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
