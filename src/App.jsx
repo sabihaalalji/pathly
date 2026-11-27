@@ -17,19 +17,40 @@ import Bookmarks from "./pages/Bookmarks";
 import ProviderDashboard from "./pages/ProviderDashboard";
 import CareerGuidance from "./pages/CareerGuidance";
 
+const storageKey = "pathly.applications";
+const seekerId = "sample-seeker";
+const opportunityId = "sample-internship";
+
+function readApplications() {
+  const saved = JSON.parse(localStorage.getItem(storageKey) ?? "[]");
+
+  if (!Array.isArray(saved)) {
+    throw new Error("Invalid saved applications");
+  }
+
+  return saved;
+}
+
 function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
 
-  function handleApply(answer) {
-    const seekerId = "sample-seeker";
-    const opportunityId = "sample-internship";
-    const storageKey = "pathly.applications";
-
+  const [applications, setApplications] = useState(() => {
     try {
-      const savedData = localStorage.getItem(storageKey);
-      const applications = savedData ? JSON.parse(savedData) : [];
+      return readApplications();
+    } catch {
+      return [];
+    }
+  });
 
-      const alreadyApplied = applications.some(
+  const myApplications = applications.filter(
+    (application) => application.seekerId === seekerId
+  );
+
+  function handleApply(answer) {
+    try {
+      const savedApplications = readApplications();
+
+      const alreadyApplied = savedApplications.some(
         (application) =>
           application.seekerId === seekerId &&
           application.opportunityId === opportunityId
@@ -51,11 +72,17 @@ function App() {
         submittedAt: new Date().toISOString(),
       };
 
+      const updatedApplications = [
+        ...savedApplications,
+        newApplication,
+      ];
+
       localStorage.setItem(
         storageKey,
-        JSON.stringify([...applications, newApplication])
+        JSON.stringify(updatedApplications)
       );
 
+      setApplications(updatedApplications);
       setSubmissionMessage("Application submitted.");
     } catch {
       setSubmissionMessage(
@@ -75,16 +102,41 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/opportunities" element={<Opportunities />} />
+
         <Route path="/bookmarks" element={<Bookmarks />} />
 
         <Route
           path="/apply"
           element={
-            <section>
-              <h2>Apply for an opportunity</h2>
-              <ApplicationForm onApply={handleApply} />
-              {submissionMessage && <p>{submissionMessage}</p>}
-            </section>
+            <>
+              <section>
+                <h2>Apply for an opportunity</h2>
+                <ApplicationForm onApply={handleApply} />
+                {submissionMessage && (
+                  <p>{submissionMessage}</p>
+                )}
+              </section>
+
+              <section>
+                <h2>My Applications</h2>
+
+                {myApplications.length === 0 ? (
+                  <p>You have not submitted any applications yet.</p>
+                ) : (
+                  <ul>
+                    {myApplications.map((application) => (
+                      <li key={application.id}>
+                        <p>
+                          Opportunity: {application.opportunityId}
+                        </p>
+                        <p>Status: {application.status}</p>
+                        <p>{application.statement}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            </>
           }
         />
 
