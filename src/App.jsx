@@ -1,3 +1,5 @@
+import Applicants from "./pages/Applicants.jsx"
+import { opportunities as pathlyOpportunities } from "./data/opportunities.js";
 import { Link, Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
@@ -31,7 +33,7 @@ function readApplications() {
 
 export default function App() {
   const [submissionMessage, setSubmissionMessage] = useState("");
-  const {state} = useLocation();
+  const {state,search} = useLocation();
   const selectedOpportunity=state?.opportunity;
   const [applications, setApplications] = useState(() => {
     try {
@@ -42,6 +44,13 @@ export default function App() {
   });
 
   const { user } = useAuth();
+  const reviewOpportunityId = new URLSearchParams(search).get("opportunityId");
+  const ownedListing=pathlyOpportunities.find(
+    (listing)=>user?.role === "provider" &&
+    user.id != null &&
+    String(listing.id) === reviewOpportunityId &&
+    String(listing.providerId) === String(user.id)
+  );
 
 const seekerId =
   user?.role === "seeker" && user.id != null ? String(user.id) : null;
@@ -221,6 +230,22 @@ const myApplications = seekerId
           path="/provider-dashboard"
           element={<ProviderDashboard />}
         />
+
+        <Route
+        path="/applicants"
+        element={
+          <ProtectedRoute requiredRole="provider">
+            {ownedListing ? (<Applicants
+            key={ownedListing.id}
+          applications={applications}
+        ownedOpportunities={[ownedListing]}
+      onStatusChange={(applicationId, nextStatus)=>
+        handleStatusChange(applicationId, nextStatus, [ownedListing])
+      }/>):(
+        <p>This listing is unavailable or does not belong to your account.</p>
+      )}
+          </ProtectedRoute>
+        }></Route>
 
         <Route
           path="/career-guidance"
