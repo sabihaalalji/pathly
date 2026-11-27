@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 import { useState } from "react";
 import { opportunities as initialOpportunities } from "../data/opportunities";
 import OpportunityForm from "../components/OpportunityForm";
@@ -7,8 +9,8 @@ function ProviderDashboard() {
 const [opportunities, setOpportunities] = useState( initialOpportunities );
 const [editingOpportunity, setEditingOpportunity]=useState(null);
 
-  // Temporary sample provider account
-const currentProviderId = 101;
+  const {user}=useAuth();
+  const currentProviderId=user?.role === "provider" ? user.id : null;
 
   // Add a new opportunity
 function handleAddOpportunity(newOpportunity) { setOpportunities((previousOpportunities) => [ ...previousOpportunities, newOpportunity, ]);}
@@ -26,7 +28,7 @@ function handleDeleteOpportunity(id) {
 }
    
   // Shows only opportunities belonging to this provider
-const myOpportunities = opportunities.filter(  (opportunity) => opportunity.providerId === currentProviderId);
+const myOpportunities = opportunities.filter(  (opportunity) => currentProviderId !=null && String(opportunity.providerId)===String(currentProviderId));
 const today = new Date().toISOString().split("T")[0];
 const activeOpportunities = myOpportunities.filter( (opportunity) => opportunity.closingDate >= today);
 const expiredOpportunities = myOpportunities.filter( (opportunity) => opportunity.closingDate < today);
@@ -71,6 +73,11 @@ const expiredOpportunities = myOpportunities.filter( (opportunity) => opportunit
       <button onClick={() => handleDeleteOpportunity(opportunity.id)} className="mt-4 ml-3 rounded-lg bg-[#FB7185] px-4 py-2 font-semibold text-white hover:bg-red-600"
       > Delete
       </button>
+      <Link
+      to={`/applicants?opportunityId=${encodeURIComponent(opportunity.id)}`}
+      className="mt-4 ml-3 inline-block rounded-lg bg-amber-100 px-4 py-2 font-semibold text-amber-900 hover:bg-amber-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+        View applicants
+      </Link>
     </div>
   );
 })}
