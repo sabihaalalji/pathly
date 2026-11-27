@@ -45,14 +45,12 @@ function CareerGuidance() {
  <div className="min-h-screen bg-[#F0FDFA] px-6 py-10">
  <div className="mx-auto max-w-6xl">
 
-{/* Introduction */}
  <section className="rounded-2xl bg-[#134E4A] px-8 py-12 text-white">
 <p className="mb-3 font-semibold text-[#FB7185]">YOUR CAREER JOURNEY STARTS HERE</p>
 <h1 className="text-3xl font-bold md:text-4xl">Build Your Future with Pathly</h1>
 <p className="mt-4 max-w-2xl leading-relaxed text-teal-50">Explore practical career advice, develop valuable skills, prepare for opportunities and take the next step towards your professional goals.</p>
  </section>
 
-{/* Career guidance cards */}
   <section className="mt-12">
     <h2 className="text-2xl font-bold text-[#042F2E]">Explore Career Guidance</h2>
     <p className="mt-2 text-[#134E4A]">Everything you need to prepare for your career journey.</p>
