@@ -27,6 +27,7 @@ Pathly is a web-based platform designed to help users discover job opportunities
 - Context API
 - Local Storage
 - REST API
+- Apps script
 
 ## Getting Started
 
@@ -40,10 +41,8 @@ Follow these instructions to run Pathly locally.
 
 ### Installation
 
-1. Clone the repository:
-
-   
-   git clone https://github.com/sabihaalalji/pathly.git
+1. Live Link
+    https://github.com/sabihaalalji/pathly.git
    
 
 2. Navigate into the project directory:
