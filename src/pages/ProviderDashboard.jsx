@@ -1,39 +1,14 @@
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
-import { opportunities as initialOpportunities } from "../data/opportunities";
 import OpportunityForm from "../components/OpportunityForm";
 import ProviderStats from "../components/ProviderStats";
 
-function ProviderDashboard() {
+function ProviderDashboard({ opportunities, setOpportunities }) {
   const { user } = useAuth();
-
-  const currentProviderId =
-    user?.role === "provider" ? user.id : null;
-
-  const [opportunities, setOpportunities] = useState(() => {
-    try {
-      const savedOpportunities = localStorage.getItem(
-        "pathly.opportunities"
-      );
-
-      return savedOpportunities
-        ? JSON.parse(savedOpportunities)
-        : initialOpportunities;
-    } catch {
-      return initialOpportunities;
-    }
-  });
-
+  const currentProviderId = user?.role === "provider" ? user.id : null;
   const [editingOpportunity, setEditingOpportunity] = useState(null);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "pathly.opportunities",
-      JSON.stringify(opportunities)
-    );
-  }, [opportunities]);
 
   function handleAddOpportunity(newOpportunity) {
     setOpportunities((previousOpportunities) => [
