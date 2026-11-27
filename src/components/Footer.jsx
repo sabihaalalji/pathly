@@ -37,7 +37,6 @@ export default function Footer() {
           <p className="mt-2 text-sm text-[#99F6E4]">Help</p>
         </div>
       </div>
-
       <div className="mt-10 flex flex-col gap-2 border-t border-white/20 pt-5 text-xs text-[#99F6E4] md:flex-row md:justify-between">
         <p>2026 Pathly. All rights reserved.</p>
         <p>Privacy | Terms</p>
