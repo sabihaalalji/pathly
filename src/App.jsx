@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -13,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Opportunities from "./pages/Opportunities";
 import Bookmarks from "./pages/Bookmarks";
+import RoleInfo from "./pages/RoleInfo.jsx";
 
 import ProviderDashboard from "./pages/ProviderDashboard";
 import CareerGuidance from "./pages/CareerGuidance";
@@ -101,8 +103,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/join/:type" element={<RoleInfo />} />
 
+        <Route path="/opportunities" element={<Opportunities />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
 
         <Route
@@ -111,7 +114,9 @@ function App() {
             <>
               <section>
                 <h2>Apply for an opportunity</h2>
+
                 <ApplicationForm onApply={handleApply} />
+
                 {submissionMessage && (
                   <p>{submissionMessage}</p>
                 )}
@@ -129,7 +134,9 @@ function App() {
                         <p>
                           Opportunity: {application.opportunityId}
                         </p>
+
                         <p>Status: {application.status}</p>
+
                         <p>{application.statement}</p>
                       </li>
                     ))}
