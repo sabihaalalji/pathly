@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { opportunities as pathlyOpportunities } from "../data/opportunities.js";
 import { useState, useEffect } from "react";
 import OpportunityDetails from "./OpportunityDetails";
 import OpportunityCard from "../components/OpportunityCard";
 
-function Opportunities() {
-  const [opportunities, setOpportunities] = useState([]);
+function Opportunities({ pathlyOpportunities }) {
+const [opportunities, setOpportunities] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [location, setLocation] = useState("all");
