@@ -1,12 +1,10 @@
 import {Link} from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useState } from "react";
-import { opportunities as initialOpportunities } from "../data/opportunities";
 import OpportunityForm from "../components/OpportunityForm";
 import ProviderStats from "../components/ProviderStats";
 
-function ProviderDashboard() {
-const [opportunities, setOpportunities] = useState( initialOpportunities );
+function ProviderDashboard({ opportunities, setOpportunities }) {
 const [editingOpportunity, setEditingOpportunity]=useState(null);
 
   const {user}=useAuth();

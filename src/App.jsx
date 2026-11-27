@@ -1,7 +1,7 @@
 import Applicants from "./pages/Applicants.jsx"
 import { opportunities as pathlyOpportunities } from "./data/opportunities.js";
 import { Link, Routes, Route, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -44,8 +44,20 @@ export default function App() {
   });
 
   const { user } = useAuth();
+  const [listings, setListings] = useState(() => {
+  try {
+    const saved = JSON.parse(localStorage.getItem("pathly.listings") ?? "null");
+    return Array.isArray(saved) ? saved : pathlyOpportunities;
+  } catch {
+    return pathlyOpportunities;
+  }
+});
+
+useEffect(() => {
+  localStorage.setItem("pathly.listings", JSON.stringify(listings));
+}, [listings]);
   const reviewOpportunityId = new URLSearchParams(search).get("opportunityId");
-  const ownedListing=pathlyOpportunities.find(
+  const ownedListing=listings.find(
     (listing)=>user?.role === "provider" &&
     user.id != null &&
     String(listing.id) === reviewOpportunityId &&
@@ -142,7 +154,7 @@ const myApplications = seekerId
   <Route path="/login" element={<Login />} />
   <Route path="/register" element={<Register />} />
   <Route path="/home" element={<Home />} />
-  <Route path="/opportunities" element={<Opportunities />} />
+  <Opportunities pathlyOpportunities={listings} />
   <Route path="/join/:type" element={<RoleInfo />} />
   <Route path="/bookmarks" element={<Bookmarks />} />
 
@@ -227,9 +239,16 @@ const myApplications = seekerId
         />
 
         <Route
-          path="/provider-dashboard"
-          element={<ProviderDashboard />}
-        />
+  path="/provider-dashboard"
+  element={
+    <ProtectedRoute requiredRole="provider">
+      <ProviderDashboard
+        opportunities={listings}
+        setOpportunities={setListings}
+      />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
         path="/applicants"
