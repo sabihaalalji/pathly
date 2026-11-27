@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[#042F2E] text-white px-5 py-4 flex justify-between items-center">
-      <Link to="/" className="text-large font-medium">
+      <Link to="/" className="text-large font-medium text-[#FB7185]">
         Pathly
       </Link>
       <div>
