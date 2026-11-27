@@ -25,6 +25,9 @@ export default function Footer() {
               <Link to="/join/providers" className={linkClass}>
                 Post an opportunity
               </Link>
+              <Link to="/career-guidance" className={linkClass}>
+                Career guidance
+              </Link>
             </div>
           </div>
 
